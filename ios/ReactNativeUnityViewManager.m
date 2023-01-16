@@ -3,7 +3,10 @@
 #import <React/RCTUIManager.h>
 #import <React/RCTBridgeModule.h>
 #import <ReactNativeUnityView.h>
+
+#if __has_include(<UnityFramework/UnityFramework.h>)
 #include <UnityFramework/UnityFramework.h>
+#endif
 
 @interface ReactNativeUnityViewManager : RCTViewManager <RCTBridgeModule>
 @end

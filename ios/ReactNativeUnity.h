@@ -1,13 +1,18 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
 #include <mach-o/ldsyms.h>
-#include <UnityFramework/UnityFramework.h>
 
+#if __has_include(<UnityFramework/UnityFramework.h>)
+#include <UnityFramework/UnityFramework.h>
 @protocol RNUnityAppController <UIApplicationDelegate, UnityFrameworkListener>
+- (UnityView *)unityView;
+#else
+@protocol RNUnityAppController <UIApplicationDelegate>
+- (UIView *)unityView;
+#endif
 
 - (UIWindow *)window;
 - (UIView *)rootView;
-- (UnityView *)unityView;
 
 @end
 

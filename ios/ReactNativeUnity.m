@@ -1,5 +1,6 @@
 #import "ReactNativeUnity.h"
 
+#if __has_include(<UnityFramework/UnityFramework.h>)
 UnityFramework* UnityFrameworkLoad()
 {
     NSString* bundlePath = nil;
@@ -20,6 +21,15 @@ UnityFramework* UnityFrameworkLoad()
 
     return ufw;
 }
+#else
+UIView* UnityFrameworkLoad()
+{
+    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 50, 320, 430)];
+    view.backgroundColor = [UIColor whiteColor];
+    
+    return view;
+}
+#endif
 
 int gArgc = 1;
 
@@ -42,7 +52,8 @@ static id<RNUnityFramework> Unity_ufw;
 + (id<RNUnityFramework>) launchWithOptions:(NSDictionary*)applaunchOptions {
     id ufw = UnityFrameworkLoad();
     [self setUfw: ufw];
-
+    
+#if __has_include(<UnityFramework/UnityFramework.h>)
     unsigned count = (int) [[[NSProcessInfo processInfo] arguments] count];
     char **array = (char **)malloc((count + 1) * sizeof(char*));
 
@@ -53,6 +64,7 @@ static id<RNUnityFramework> Unity_ufw;
     array[count] = NULL;
 
     [[self ufw] runEmbeddedWithArgc: gArgc argv: array appLaunchOpts: applaunchOptions];
+#endif
 
     return self.ufw;
 }

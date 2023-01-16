@@ -13,7 +13,9 @@ NSDictionary* appLaunchOpts;
         [[ReactNativeUnity ufw] registerFrameworkListener:self];
         // HACK: Sometimes we can't find NativeCallsProxy.h during linking stage
         // Let's defer that to runtime to fix the build
+#if __has_include(<UnityFramework/UnityFramework.h>)
         [NSClassFromString(@"FrameworkLibAPI") registerAPIforNativeCalls:self];
+#endif
     }
     return self;
 }
