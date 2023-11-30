@@ -45,8 +45,7 @@ Pod::Spec.new do |s|
   # The framework should be placed in the <YOUR_PROJECT>/unity/builds/ios folder.
   s.prepare_command =
   <<-CMD
-    pwd
-    ls ../../unity/framework/ios
+    echo "baud hack"
     cp -R ../../unity/framework/ios/ ios/
   CMD
 
