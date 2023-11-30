@@ -45,9 +45,10 @@ Pod::Spec.new do |s|
   # The framework should be placed in the <YOUR_PROJECT>/unity/builds/ios folder.
   s.prepare_command =
   <<-CMD
-    echo "baud hack"
     cp -R ../../unity/framework/ios/ ios/
   CMD
+
+  s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(BUILD_ROOT)/** $(CONFIGURATION_BUILD_DIR)/../**' }
 
   s.vendored_frameworks = ["ios/UnityFramework.framework"]
 end
